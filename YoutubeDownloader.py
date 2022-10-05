@@ -1,6 +1,7 @@
 from pytube import YouTube
 import tkinter as tk
 from tkinter import ttk
+import os
 
 
 def download_video():
@@ -8,7 +9,11 @@ def download_video():
     #print("Started downloading video...")
     yt = YouTube(url)
     ytr = yt.streams.get_highest_resolution()
-    ytr.download('C:/Users/Niklas/Videos/YouTube')
+    path = 'C:/Users/' + os.getlogin() + '/Videos/YouTube'
+    if(os.path.isdir(path)):
+        ytr.download(path)
+    else:
+        ytr.download('C:/Users/' + os.getlogin() + '/Videos')
     #print("Video successfully downloaded")
     resetWindow()
 
